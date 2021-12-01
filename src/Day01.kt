@@ -1,11 +1,12 @@
 fun main() {
     fun part1(input: List<String>): Int {
-        return input.map(String::toInt).zipWithNext().map { if (it.second > it.first) 1 else 0 }.sum()
+        return input.map(String::toInt).zipWithNext().sumOf { if (it.second > it.first) 1.toInt() else 0 }
     }
 
     fun part2(input: List<String>): Int {
         val numbers = input.map(String::toInt)
-        return numbers.zip(numbers.subList(3, numbers.lastIndex + 1)).map { if (it.second > it.first) 1 else 0 }.sum()
+        return numbers.zip(numbers.subList(3, numbers.lastIndex + 1))
+            .sumOf { if (it.second > it.first) 1.toInt() else 0 }
     }
 
     val testInput = readInput("Day01_test")
