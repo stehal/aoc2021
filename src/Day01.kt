@@ -8,8 +8,7 @@ fun main() {
     fun part2(input: List<String>): Int {
         var count = 0;
         val numbers = input.map(String::toInt)
-        numbers.zip(numbers.subList(1, numbers.lastIndex + 1)).zip(numbers.subList(2, numbers.lastIndex + 1))
-            .map { it.first.first + it.first.second + it.second }.zipWithNext()
+        numbers.zip(numbers.subList(3, numbers.lastIndex + 1))
             .forEach { if (it.first < it.second) count++ }
         return count
     }
