@@ -1,16 +1,11 @@
 fun main() {
     fun part1(input: List<String>): Int {
-        var count = 0;
-        input.map(String::toInt).zipWithNext().forEach { if (it.first < it.second) count++ }
-        return count
+        return input.map(String::toInt).zipWithNext().map { if (it.second > it.first) 1 else 0 }.sum()
     }
 
     fun part2(input: List<String>): Int {
-        var count = 0;
         val numbers = input.map(String::toInt)
-        numbers.zip(numbers.subList(3, numbers.lastIndex + 1))
-            .forEach { if (it.first < it.second) count++ }
-        return count
+        return numbers.zip(numbers.subList(3, numbers.lastIndex + 1)).map { if (it.second > it.first) 1 else 0 }.sum()
     }
 
     val testInput = readInput("Day01_test")
