@@ -20,7 +20,7 @@ fun main() {
             when (it[0]) {
                 "forward" -> {
                     position += it[1].toInt()
-                    depth += aim* it[1].toInt()
+                    depth += aim * it[1].toInt()
                 }
                 "down" -> aim += it[1].toInt()
                 "up" -> aim -= it[1].toInt()
@@ -38,3 +38,4 @@ fun main() {
     println("part 1 ${part1(input)}")
     println("part 2 ${part2(input)}")
 }
+
