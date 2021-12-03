@@ -29,7 +29,6 @@ fun main() {
         return ogr[0].toInt(2) * csr[0].toInt(2)
     }
 
-    // test if implementation meets criteria from the description, like:
     val testInput = readInput("Day03_test")
     check(part1(testInput) == 198)
     check(part2(testInput) == 230)
