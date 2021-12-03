@@ -22,8 +22,8 @@ fun main() {
         var ogr = input.toList()
         var csr = input.toList()
         (0 until input[0].length).forEach {
-            ogr = filter(ogr, it) { b, size -> if (b >= size / 2.0) "1" else "0" }
-            csr = filter(csr, it) { b, size -> if (b < size / 2.0) "1" else "0" }
+            ogr = filter(ogr, it) { b, size -> b >= size / 2.0 }
+            csr = filter(csr, it) { b, size -> b < size / 2.0 }
         }
 
         return ogr[0].toInt(2) * csr[0].toInt(2)
@@ -39,12 +39,11 @@ fun main() {
     println("part 2 ${part2(input)}")
 }
 
-fun filter(input: List<String>, pos: Int, comp: (b: Int, size: Int) -> String): List<String> {
+fun filter(input: List<String>, pos: Int, isOne: (b: Int, size: Int) -> Boolean): List<String> {
     if (input.size == 1) return input
     var b = 0
     input.forEach { inputValue -> b += inputValue[pos].toString().toInt() }
-    val c = comp(b, input.size)
-    val filtered = mutableListOf<String>()
-    input.forEach { if (it[pos].toString() == c) filtered.add(it) }
-    return filtered
+    return input.filter {
+        it[pos].toString() == if (isOne(b, input.size)) "1" else "0"
+    }
 }
