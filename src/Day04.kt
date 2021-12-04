@@ -39,7 +39,7 @@ class Board() {
         return true
     }
 
-    fun wins(): Boolean {
+    fun hasWon(): Boolean {
         if (aColumnWins() || aRowWins()) return true
         return false
     }
@@ -69,7 +69,7 @@ fun main() {
         draws.forEach { draw ->
             boards.forEach { board ->
                 board.mark(draw)
-                if (board.wins()) {
+                if (board.hasWon()) {
                     return board.sumOfUnmarked() * draw
                 }
             }
@@ -84,9 +84,9 @@ fun main() {
 
         draws.forEach { draw ->
             boards.forEach { board ->
-                if (!board.wins()) {
+                if (!board.hasWon()) {
                     board.mark(draw)
-                    if (board.wins()) {
+                    if (board.hasWon()) {
                         order += 1
                         if (order == boards.size) {
                             return board.sumOfUnmarked() * draw

@@ -92,18 +92,18 @@ internal class Day04BoardTest {
         board.mark(13)
         board.mark(14)
         board.mark(15)
-        assertTrue(board.wins())
+        assertTrue(board.hasWon())
     }
 
     @Test
     fun aBoardWins() {
         val board = testBoard()
-        assertEquals(false, board.wins())
+        assertEquals(false, board.hasWon())
         board.mark(2)
         board.mark(7)
         board.mark(12)
         board.mark(17)
         board.mark(22)
-        assertTrue(board.wins())
+        assertTrue(board.hasWon())
     }
 }
