@@ -40,8 +40,7 @@ class Board() {
     }
 
     fun wins(): Boolean {
-        if (aColumnWins()) return true
-        if (aRowWins()) return true
+        if (aColumnWins() || aRowWins()) return true
         return false
     }
 }
@@ -54,14 +53,15 @@ fun main() {
     fun boards(input: List<String>): List<Board> {
         val boards = mutableListOf<Board>()
         input.subList(2, input.size).windowed(5, 6).forEach {
-            val b = Board()
-            it.forEach {
-                b.addRow(it)
+            val board = Board()
+            it.forEach {row->
+                board.addRow(row)
             }
-            boards.add(b)
+            boards.add(board)
         }
         return boards
     }
+
     fun part1(input: List<String>): Int {
         val draws = input[0].split(",").map { it.toInt() }.toList()
         val boards = boards(input)
