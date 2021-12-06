@@ -3,10 +3,10 @@ data class Lanternfish(var timer: Int)
 fun main() {
 
     fun part1(input: List<String>): Int {
-        val school = input[0].split(",").map { Lanternfish(it.toInt()) }.toMutableList()
+        val school = input.first().split(",").map { Lanternfish(it.toInt()) }.toMutableList()
         for (day in (1..80)) {
             val births = school.filter { it.timer == 0 }.map { it.timer = 7 }
-            births.forEach { school.add(Lanternfish(9)) }
+            repeat(births.size) { school.add(Lanternfish(9)) }
             school.map { lanternfish ->
                 lanternfish.timer -= 1
             }
@@ -18,9 +18,9 @@ fun main() {
         val school = HashMap<Int, Long>()
         (0..9).forEach { school[it] = 0 }
 
-        input[0].split(",").map { it.toInt() }.forEach { it -> school[it] = school[it]!! + 1.toLong() }
+        input.first().split(",").map { it.toInt() }.forEach { it -> school[it] = school[it]!! + 1.toLong() }
 
-        (1..256).forEach { _ ->
+        repeat(256) {
             school[9] = school[0]!!
             school[7] = school[7]!! + school[0]!!
             school[0] = 0
@@ -29,7 +29,7 @@ fun main() {
                 school[it] = 0
             }
         }
-        return school.values.sumOf { it }
+        return school.values.sum()
     }
 
     val testInput = readInput("Day06_test")
