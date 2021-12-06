@@ -4,7 +4,7 @@ fun main() {
 
     fun part1(input: List<String>): Int {
         val school = input.first().split(",").map { Lanternfish(it.toInt()) }.toMutableList()
-        for (day in (1..80)) {
+        repeat(80) {
             val births = school.filter { it.timer == 0 }.map { it.timer = 7 }
             repeat(births.size) { school.add(Lanternfish(9)) }
             school.map { lanternfish ->
@@ -15,9 +15,7 @@ fun main() {
     }
 
     fun part2(input: List<String>): Long {
-        val school = HashMap<Int, Long>()
-        (0..9).forEach { school[it] = 0 }
-
+        val school = (0..9).associateWith { k -> 0L }.toMutableMap()
         input.first().split(",").map { it.toInt() }.forEach { it -> school[it] = school[it]!! + 1.toLong() }
 
         repeat(256) {
