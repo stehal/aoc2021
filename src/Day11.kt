@@ -4,10 +4,6 @@ data class Octopus(var energy: Int, var hasFlashed: Boolean = false) {
         return !hasFlashed && energy > 9
     }
 
-    fun increment() {
-        energy++
-    }
-
     fun reset() {
         energy = 0
         hasFlashed = false
@@ -26,7 +22,7 @@ fun adjacent(cave: List<List<Octopus>>, origin: Pair<Int, Int>): List<Octopus> {
 }
 
 fun incrementEnergy(cave: List<List<Octopus>>) {
-    (cave.indices).map { y -> (cave.indices).map { x -> cave[y][x].increment() } }
+    (cave.indices).map { y -> (cave.indices).map { x -> cave[y][x].energy++ } }
 }
 
 fun flashes(cave: List<List<Octopus>>): Int {
@@ -39,7 +35,7 @@ fun flash(cave: List<List<Octopus>>): Int {
         (cave.indices).map { x ->
             if (cave[y][x].isAboutToFlash()) {
                 cave[y][x].hasFlashed = true
-                adjacent(cave, Pair(x, y)).forEach { octopus -> octopus.increment() }
+                adjacent(cave, Pair(x, y)).forEach { octopus -> octopus.energy++ }
             }
         }
     }
@@ -62,7 +58,7 @@ fun main() {
             line.toCharArray().map { Octopus(Character.getNumericValue(it)) }.toList()
         }
 
-        (1..100).forEach {
+        (1..100).forEach { _ ->
             incrementEnergy(cave)
             totalFlashes += flash(cave)
             reset(cave)
